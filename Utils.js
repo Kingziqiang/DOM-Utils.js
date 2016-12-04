@@ -11,8 +11,8 @@ Utils = (function () {
         if (len === 1) {
             return document.documentElement[attr] || document.body[attr];
         }
-        docuemnt.documentElement[attr] = val;
-        document.body[attt] = val;
+        document.documentElement[attr] = val;
+        document.body[attr] = val;
     }
 
     //listToAry: The type of array is converted into an array;
@@ -80,18 +80,18 @@ Utils = (function () {
     }
 
     // getCss: Obtain the elements of style;
-    /*  方法1
-     function getCss(curEle,attr){
-     var val = window.getComputedStyle? getComputedStyle(curEle,null)[attr] : curEle.currentStyle[attr];
+      //方法1
+    /* function getCss(curEle,attr){
+     var val = window.getComputedStyle? window.getComputedStyle(curEle,null)[attr] : curEle.currentStyle[attr];
      if(!isNaN(parseFloat(val))) val = parseFloat(val);
      return val;
      }*/
     // 方法2
     function getCss(curEle, attr) {
-        var val = "getComputedStyle" in window ? getComputedStyle(curEle, null)[attr] : curEle.currentStyle[attr];
-        if (!isNaN(parseFloat(val))) val = parseFloat(val);
-        return val;
-    }
+        var val = "getComputedStyle" in window ? window.getComputedStyle(curEle, null)[attr] : curEle.currentStyle[attr];
+        var temp = parseFloat(val);
+        return isNaN(temp) ? val : temp;
+    };
 
     /*
      // 方法3
